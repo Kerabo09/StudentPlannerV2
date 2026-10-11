@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useApp } from '@/tasks/tasks';
 import { colors, PRIORITIES } from '@/tasks/tasks.styles';
-import { DeadlineField } from './deadline-field';
+import { ChoiceField, DeadlineField, ESTIMATE_OPTIONS, REPEAT_OPTIONS, SubjectField, TYPE_OPTIONS } from './form-fields';
 import { styles } from './add-task.styles';
 
 export function AddTaskScreen() {
@@ -30,6 +30,9 @@ function AddTaskForm({ onSubmit }) {
   const [priority, setPriority] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [notes, setNotes] = useState('');
+  const [type, setType] = useState('Assignment');
+  const [repeat, setRepeat] = useState('None');
+  const [estimateMin, setEstimateMin] = useState(null);
 
   const deadline = checkDeadline(dueDate);
   const showDeadlineError = dueDate.trim().length > 0 && !deadline.ok;
@@ -44,6 +47,9 @@ function AddTaskForm({ onSubmit }) {
       priority,
       dueDate: deadline.value,
       notes: notes.trim(),
+      type,
+      repeat,
+      estimateMin,
     });
   };
 
@@ -72,17 +78,7 @@ function AddTaskForm({ onSubmit }) {
             />
           </View>
 
-          <View>
-            <Text style={styles.label}>Subject *</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="e.g. Mobile Programming"
-              placeholderTextColor={colors.faint}
-              value={subject}
-              onChangeText={setSubject}
-              returnKeyType="next"
-            />
-          </View>
+          <SubjectField label="Subject *" value={subject} onChange={setSubject} />
 
           <View>
             <Text style={styles.label}>Priority *</Text>
@@ -104,12 +100,18 @@ function AddTaskForm({ onSubmit }) {
             </View>
           </View>
 
+          <ChoiceField label="Type" options={TYPE_OPTIONS} value={type} onChange={setType} />
+
           <DeadlineField
             label="Deadline *"
             value={dueDate}
             onChange={setDueDate}
             error={showDeadlineError ? deadline.message : ''}
           />
+
+          <ChoiceField label="Repeat" options={REPEAT_OPTIONS} value={repeat} onChange={setRepeat} />
+
+          <ChoiceField label="Time needed (optional)" options={ESTIMATE_OPTIONS} value={estimateMin} onChange={setEstimateMin} />
 
           <View>
             <Text style={styles.label}>Description (optional)</Text>

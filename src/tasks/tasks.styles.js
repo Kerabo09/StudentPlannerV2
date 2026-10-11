@@ -19,47 +19,27 @@ export const colors = {
 };
 
 export const PRIORITY_STYLES = {
-  High: {
-    bg: '#FDF2F8',
-    text: '#DB2777',
-  },
-  Medium: {
-    bg: '#FFF7ED',
-    text: '#D97706',
-  },
-  Low: {
-    bg: '#F0FDF4',
-    text: '#16A34A',
-  },
+  High: { bg: '#FDF2F8', text: '#DB2777' },
+  Medium: { bg: '#FFF7ED', text: '#D97706' },
+  Low: { bg: '#F0FDF4', text: '#16A34A' },
 };
 
-export const PRIORITIES = ['High', 'Medium', 'Low'];
+export const URGENCY_STYLES = {
+  overdue: { bg: '#FEF2F2', text: '#DC2626' },
+  today: { bg: '#FFF7ED', text: '#D97706' },
+  soon: { bg: '#EEF2FF', text: '#4F46E5' },
+  neutral: { bg: '#F3F4F6', text: '#6B7280' },
+};
+
+export const PRIORITIES = ['Low', 'Medium', 'High'];
 
 export const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: colors.bg,
-  },
-  list: {
-    flex: 1,
-  },
-  listFooter: {
-    height: 32,
-  },
+  screen: { flex: 1, backgroundColor: colors.bg },
+  list: { flex: 1 },
+  listFooter: { height: 32 },
 
-  header: {
-    alignItems: 'flex-start',
-    paddingHorizontal: 20,
-    paddingTop: 16,
-    paddingBottom: 8,
-  },
-  headerTitle: {
-    fontSize: 28,
-    lineHeight: 34,
-    fontWeight: '700',
-    letterSpacing: -0.3,
-    color: colors.text,
-  },
+  header: { alignItems: 'flex-start', paddingHorizontal: 20, paddingTop: 16, paddingBottom: 8 },
+  headerTitle: { fontSize: 28, lineHeight: 34, fontWeight: '700', letterSpacing: -0.3, color: colors.text },
 
   dateRow: {
     flexDirection: 'row',
@@ -69,27 +49,11 @@ export const styles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 16,
   },
-  dateLabel: {
-    fontSize: 11,
-    color: colors.muted,
-    fontWeight: '500',
-    letterSpacing: 0.5,
-  },
-  dateTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: colors.text,
-    marginTop: 2,
-  },
-  taskCount: {
-    fontSize: 12,
-    color: colors.muted,
-  },
+  dateLabel: { fontSize: 11, color: colors.muted, fontWeight: '500', letterSpacing: 0.5 },
+  dateTitle: { fontSize: 16, fontWeight: '600', color: colors.text, marginTop: 2 },
+  taskCount: { fontSize: 12, color: colors.muted },
 
-  searchRow: {
-    paddingHorizontal: 20,
-    marginBottom: 12,
-  },
+  searchRow: { paddingHorizontal: 20, marginBottom: 12 },
   searchBox: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -101,12 +65,40 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
   },
-  searchInput: {
+  searchInput: { flex: 1, fontSize: 14, color: colors.text, padding: 0 },
+
+  statsRow: { flexDirection: 'row', gap: 10, paddingHorizontal: 20, marginBottom: 12 },
+  statTile: { flex: 1, backgroundColor: colors.card, borderRadius: 14, paddingVertical: 12, paddingHorizontal: 12 },
+  statTilePressed: { opacity: 0.8 },
+  statNumber: { fontSize: 22, fontWeight: '700', color: colors.text },
+  statLabel: { fontSize: 11, color: colors.muted, fontWeight: '500', marginTop: 2 },
+
+  progressCard: { marginHorizontal: 20, marginBottom: 12, backgroundColor: colors.card, borderRadius: 14, padding: 14, gap: 8 },
+  progressRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  progressTitle: { fontSize: 13, fontWeight: '600', color: colors.text },
+  progressMeta: { fontSize: 12, color: colors.muted },
+
+  streakText: { fontSize: 12, color: colors.primary, fontWeight: '600' },
+
+  weekRow: { flexDirection: 'row', gap: 6, paddingHorizontal: 20, marginBottom: 12 },
+  dayPill: {
     flex: 1,
-    fontSize: 14,
-    color: colors.text,
-    padding: 0,
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderRadius: 12,
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
+  dayPillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
+  dayLabel: { fontSize: 10, fontWeight: '600', color: colors.muted },
+  dayNumber: { fontSize: 16, fontWeight: '700', color: colors.text, marginVertical: 2 },
+  dayCount: { fontSize: 11, fontWeight: '700', color: colors.primary },
+  dayTextActive: { color: colors.white },
+
+  chipRow: { paddingHorizontal: 20, gap: 8, paddingBottom: 10 },
+  sortRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 20, paddingBottom: 12 },
+  sortLabel: { fontSize: 12, color: colors.muted, fontWeight: '500' },
 
   card: {
     marginHorizontal: 20,
@@ -120,34 +112,15 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     elevation: 1,
   },
-  cardPressed: {
-    opacity: 0.85,
-  },
-  cardRow: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  cardContent: {
-    flex: 1,
-    gap: 5,
-  },
-  cardTitle: {
-    fontSize: 15,
-    fontWeight: '700',
-    color: colors.text,
-  },
-  cardMeta: {
-    fontSize: 13,
-    color: colors.muted,
-  },
+  cardPressed: { opacity: 0.85 },
+  cardRow: { flexDirection: 'row', gap: 12 },
+  cardContent: { flex: 1, gap: 5 },
+  cardTitle: { fontSize: 15, fontWeight: '700', color: colors.text },
+  cardMeta: { fontSize: 13, color: colors.muted },
+  cardBadges: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
+  cardExtra: { fontSize: 12, color: colors.primary, fontWeight: '500' },
 
-  empty: {
-    marginHorizontal: 20,
-    backgroundColor: colors.card,
-    borderRadius: 16,
-    padding: 32,
-    alignItems: 'center',
-  },
+  empty: { marginHorizontal: 20, backgroundColor: colors.card, borderRadius: 16, padding: 32, alignItems: 'center' },
   emptyIcon: {
     width: 64,
     height: 64,
@@ -157,18 +130,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 16,
   },
-  emptyTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: colors.text,
-    marginBottom: 4,
-  },
-  emptyBody: {
-    fontSize: 14,
-    color: colors.muted,
-    textAlign: 'center',
-    lineHeight: 20,
-  },
+  emptyTitle: { fontSize: 16, fontWeight: '600', color: colors.text, marginBottom: 4 },
+  emptyBody: { fontSize: 14, color: colors.muted, textAlign: 'center', lineHeight: 20 },
 });
 
 export const checkboxStyles = StyleSheet.create({
@@ -182,39 +145,40 @@ export const checkboxStyles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 2,
   },
-  checkboxChecked: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
+  checkboxChecked: { backgroundColor: colors.primary, borderColor: colors.primary },
+});
+
+export const chipStyles = StyleSheet.create({
+  chip: {
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+    borderRadius: 20,
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
+  chipActive: { backgroundColor: colors.primary, borderColor: colors.primary },
+  chipText: { fontSize: 13, color: colors.muted, fontWeight: '500' },
+  chipTextActive: { color: colors.white },
+});
+
+export const progressStyles = StyleSheet.create({
+  track: { height: 8, borderRadius: 4, backgroundColor: colors.primarySoft, overflow: 'hidden' },
+  fill: { height: 8, borderRadius: 4, backgroundColor: colors.primary },
 });
 
 export const screenStyles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: colors.bg,
-  },
+  screen: { flex: 1, backgroundColor: colors.bg },
 });
 
 export const badgeStyles = StyleSheet.create({
-  badge: {
-    alignSelf: 'flex-start',
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    borderRadius: 6,
-  },
-  badgeText: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
+  badge: { alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 3, borderRadius: 6 },
+  badgeText: { fontSize: 12, fontWeight: '600' },
 });
 
 export const detailsStyles = StyleSheet.create({
-  scroll: {
-    flex: 1,
-  },
-  bottomSpacer: {
-    height: 32,
-  },
+  scroll: { flex: 1 },
+  bottomSpacer: { height: 32 },
 
   topBar: {
     flexDirection: 'row',
@@ -223,60 +187,22 @@ export const detailsStyles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
   },
-  backBtn: {
-    padding: 4,
-  },
-  notFoundBack: {
-    padding: 4,
-    alignSelf: 'flex-start',
-    marginLeft: 16,
-    marginTop: 12,
-  },
-  topBarTitle: {
-    fontSize: 17,
-    fontWeight: '600',
-    color: colors.text,
-  },
-  editText: {
-    fontSize: 15,
-    color: colors.primary,
-    fontWeight: '600',
-  },
-  notFound: {
-    padding: 20,
-    color: colors.muted,
-  },
-  hero: {
-    paddingHorizontal: 20,
-    paddingBottom: 16,
-  },
-  heroMeta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 10,
-  },
+  backBtn: { padding: 4 },
+  notFoundBack: { padding: 4, alignSelf: 'flex-start', marginLeft: 16, marginTop: 12 },
+  topBarTitle: { fontSize: 17, fontWeight: '600', color: colors.text },
+  editText: { fontSize: 15, color: colors.primary, fontWeight: '600' },
+  notFound: { padding: 20, color: colors.muted },
+  hero: { paddingHorizontal: 20, paddingBottom: 16 },
+  heroMeta: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 10 },
   subjBadge: {
     paddingHorizontal: 10,
     paddingVertical: 3,
     borderRadius: 6,
     backgroundColor: colors.primarySoft,
   },
-  subjBadgeText: {
-    fontSize: 12,
-    color: colors.primary,
-    fontWeight: '600',
-  },
-  heroTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: colors.text,
-    marginBottom: 6,
-  },
-  heroSub: {
-    fontSize: 13,
-    color: colors.muted,
-  },
+  subjBadgeText: { fontSize: 12, color: colors.primary, fontWeight: '600' },
+  heroTitle: { fontSize: 24, fontWeight: '700', color: colors.text, marginBottom: 6 },
+  heroSub: { fontSize: 13, color: colors.muted },
   card: {
     marginHorizontal: 20,
     backgroundColor: colors.card,
@@ -284,39 +210,26 @@ export const detailsStyles = StyleSheet.create({
     padding: 16,
     marginBottom: 12,
   },
-  cardTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: colors.text,
-    marginBottom: 12,
-  },
-  notesText: {
-    fontSize: 14,
-    color: colors.textBody,
-    lineHeight: 21,
-  },
-  deleteBtn: {
+  cardTitle: { fontSize: 16, fontWeight: '700', color: colors.text, marginBottom: 12 },
+  notesText: { fontSize: 14, color: colors.textBody, lineHeight: 21 },
+  doneBtn: {
     marginHorizontal: 20,
-    paddingVertical: 12,
+    marginBottom: 12,
+    backgroundColor: colors.primary,
+    paddingVertical: 13,
+    borderRadius: 12,
     alignItems: 'center',
   },
-  deleteBtnText: {
-    color: colors.danger,
-    fontSize: 14,
-    fontWeight: '500',
-  },
+  doneBtnReopen: { backgroundColor: colors.primarySoft },
+  doneBtnText: { color: colors.white, fontSize: 15, fontWeight: '600' },
+  doneBtnTextReopen: { color: colors.primary },
+  deleteBtn: { marginHorizontal: 20, paddingVertical: 12, alignItems: 'center' },
+  deleteBtnText: { color: colors.danger, fontSize: 14, fontWeight: '500' },
 });
 
 export const rootStyles = StyleSheet.create({
-  loading: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.bg,
-  },
-  stackContent: {
-    backgroundColor: colors.bg,
-  },
+  loading: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.bg },
+  stackContent: { backgroundColor: colors.bg },
 });
 
 export const tabStyles = StyleSheet.create({
@@ -325,8 +238,59 @@ export const tabStyles = StyleSheet.create({
     borderTopColor: colors.border,
     borderTopWidth: StyleSheet.hairlineWidth,
   },
-  tabLabel: {
-    fontSize: 11,
-    fontWeight: '500',
+  tabLabel:
+   { fontSize: 11, 
+    fontWeight: '500'
+   },
+});
+
+export const stepStyles = StyleSheet.create({
+  headRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 10 },
+  count: { fontSize: 12, color: colors.muted },
+  row: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 8 },
+  title: { flex: 1, fontSize: 14, color: colors.textBody },
+  titleDone: { textDecorationLine: 'line-through', color: colors.faint },
+  removeBtn: { padding: 4 },
+  addRow: { flexDirection: 'row', gap: 8, marginTop: 10 },
+  input: {
+    flex: 1,
+    backgroundColor: colors.bg,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: colors.border,
+    paddingHorizontal: 12,
+    paddingVertical: 9,
+    fontSize: 14,
+    color: colors.text,
   },
+  addBtn: { backgroundColor: colors.primary, borderRadius: 10, paddingHorizontal: 16, justifyContent: 'center' },
+  addBtnDisabled: { opacity: 0.4 },
+  addBtnText: { color: colors.white, fontSize: 14, fontWeight: '600' },
+  empty: { fontSize: 13, color: colors.muted },
+});
+
+export const focusStyles = StyleSheet.create({
+  time: { fontSize: 44, fontWeight: '700', color: colors.text, textAlign: 'center', letterSpacing: 1 },
+  presetRow: { flexDirection: 'row', justifyContent: 'center', gap: 8, marginVertical: 10 },
+  buttonRow: { flexDirection: 'row', gap: 10, marginTop: 4 },
+  primaryBtn: { flex: 1, backgroundColor: colors.primary, borderRadius: 12, paddingVertical: 12, alignItems: 'center' },
+  primaryBtnText: { color: colors.white, fontSize: 15, fontWeight: '600' },
+  secondaryBtn: {
+    flex: 1,
+    backgroundColor: colors.primarySoft,
+    borderRadius: 12,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  secondaryBtnText: { color: colors.primary, fontSize: 15, fontWeight: '600' },
+  estimate: { marginTop: 12, gap: 6 },
+  total: { fontSize: 13, color: colors.muted, textAlign: 'center', marginTop: 12 },
+  message: { fontSize: 13, color: colors.success, textAlign: 'center', marginTop: 8, fontWeight: '500' },
+});
+
+export const scoreStyles = StyleSheet.create({
+  row: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 12 },
+  input: { flex: 1 },
+  out: { fontSize: 13, color: colors.muted },
+  percent: { fontSize: 16, fontWeight: '700', color: colors.primary },
 });

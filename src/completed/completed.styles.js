@@ -37,6 +37,90 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     color: colors.danger,
   },
+  insights: {
+    marginHorizontal: 20,
+    marginBottom: 12,
+    backgroundColor: colors.card,
+    borderRadius: 16,
+    padding: 16,
+    gap: 10,
+  },
+  insightsHead: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+  },
+  insightsTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: colors.text,
+  },
+  insightsMeta: {
+    fontSize: 12,
+    color: colors.muted,
+  },
+  bars: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    gap: 6,
+    height: 96,
+  },
+  barCol: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: 3,
+  },
+  bar: {
+    width: '100%',
+    maxWidth: 28,
+    borderRadius: 6,
+    backgroundColor: colors.primarySoft,
+  },
+  barActive: {
+    backgroundColor: colors.primary,
+  },
+  barValue: {
+    fontSize: 10,
+    color: colors.muted,
+  },
+  barLabel: {
+    fontSize: 10,
+    color: colors.faint,
+    fontWeight: '600',
+  },
+  subjectList: {
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+    paddingTop: 6,
+  },
+  subjectRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 7,
+    gap: 10,
+  },
+  subjectInfo: {
+    flex: 1,
+    gap: 2,
+  },
+  subjectName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.text,
+  },
+  subjectAvg: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: colors.primary,
+  },
+  cardScore: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: colors.success,
+  },
   count: {
     paddingHorizontal: 20,
     paddingTop: 4,

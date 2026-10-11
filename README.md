@@ -8,7 +8,9 @@ A React Native (Expo) study planner. Tasks have a subject, priority, deadline, n
 - Smart deadline badges ("Overdue by 2 days", "Due today", "Due in 3 days")
 - Task details: Mark as done, Steps checklist, Focus timer that logs study minutes to the task
 - Add / Edit Task: one-tap subject chips and quick deadline buttons
-- Completed tab: weekly summary, completion date and study time
+- Completed tab: Study insights (7-day study chart, streak, per-subject summary), completion date, score and study time
+- 7-day week strip on the Tasks tab, study streak, task types (Assignment / Quiz / Exam / Project / Reading)
+- Repeating tasks (Daily / Weekly), time-needed estimate, and a score per finished task (average per subject)
 
 ## Get started
 

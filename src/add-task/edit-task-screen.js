@@ -4,7 +4,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { BackIcon } from '@/tasks/icon';
 import { Screen, useApp, useSafeBack } from '@/tasks/tasks';
 import { colors, PRIORITIES } from '@/tasks/tasks.styles';
-import { DeadlineField } from './deadline-field';
+import { ChoiceField, DeadlineField, ESTIMATE_OPTIONS, REPEAT_OPTIONS, SubjectField, TYPE_OPTIONS } from './form-fields';
 import { editStyles, formStyles, headerStyles } from './add-task.styles';
 
 const pad = n => String(n).padStart(2, '0');
@@ -46,6 +46,9 @@ function TaskForm({ heading, initial, onSubmit, onCancel }) {
   const [dueDate, setDueDate] = useState(initial?.dueDate ?? '');
   const [notes, setNotes] = useState(initial?.notes ?? '');
   const [priority, setPriority] = useState(initial?.priority ?? '');
+  const [type, setType] = useState(initial?.type ?? 'Assignment');
+  const [repeat, setRepeat] = useState(initial?.repeat ?? 'None');
+  const [estimateMin, setEstimateMin] = useState(initial?.estimateMin ?? null);
 
   const deadline = checkEditDeadline(dueDate);
   const showDeadlineError = !deadline.ok;
@@ -59,6 +62,9 @@ function TaskForm({ heading, initial, onSubmit, onCancel }) {
       priority: priority || 'Medium',
       dueDate: deadline.value,
       notes: notes.trim(),
+      type,
+      repeat,
+      estimateMin,
     });
   };
 
@@ -74,7 +80,7 @@ function TaskForm({ heading, initial, onSubmit, onCancel }) {
           showsVerticalScrollIndicator={false}
         >
           <View>
-            <Text style={formStyles.label}>Title *</Text>
+            <Text style={formStyles.label}>Title</Text>
             <TextInput
               style={formStyles.input}
               placeholder="Task title"
@@ -85,17 +91,7 @@ function TaskForm({ heading, initial, onSubmit, onCancel }) {
             />
           </View>
 
-          <View>
-            <Text style={formStyles.label}>Subject</Text>
-            <TextInput
-              style={formStyles.input}
-              placeholder="e.g. Mobile Programming"
-              placeholderTextColor={colors.faint}
-              value={subject}
-              onChangeText={setSubject}
-              returnKeyType="next"
-            />
-          </View>
+          <SubjectField label="Subject" value={subject} onChange={setSubject} />
 
           <View>
             <Text style={formStyles.label}>Priority</Text>
@@ -117,12 +113,18 @@ function TaskForm({ heading, initial, onSubmit, onCancel }) {
             </View>
           </View>
 
+          <ChoiceField label="Type" options={TYPE_OPTIONS} value={type} onChange={setType} />
+
           <DeadlineField
             label="Deadline"
             value={dueDate}
             onChange={setDueDate}
             error={showDeadlineError ? deadline.message : ''}
           />
+
+          <ChoiceField label="Repeat" options={REPEAT_OPTIONS} value={repeat} onChange={setRepeat} />
+
+          <ChoiceField label="Time needed (optional)" options={ESTIMATE_OPTIONS} value={estimateMin} onChange={setEstimateMin} />
 
           <View>
             <Text style={formStyles.label}>Description (optional)</Text>

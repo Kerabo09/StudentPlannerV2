@@ -112,32 +112,6 @@ export const styles = StyleSheet.create({
   },
 });
 
-export const chipStyles = StyleSheet.create({
-  chip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    paddingHorizontal: 14,
-    paddingVertical: 7,
-    borderRadius: 20,
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-  chipActive: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
-  },
-  chipText: {
-    fontSize: 13,
-    color: colors.muted,
-    fontWeight: '500',
-  },
-  chipTextActive: {
-    color: colors.white,
-  },
-});
-
 export const headerStyles = StyleSheet.create({
   formHeader: {
     flexDirection: 'row',
@@ -204,6 +178,19 @@ export const formStyles = StyleSheet.create({
     fontSize: 12,
     color: colors.danger,
     marginTop: 6,
+  },
+  chipRow: {
+    gap: 8,
+    paddingTop: 8,
+  },
+  choiceRow: {
+    gap: 8,
+  },
+  quickRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: 8,
   },
   textArea: {
     minHeight: 88,

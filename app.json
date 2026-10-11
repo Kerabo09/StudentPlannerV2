@@ -1,18 +1,18 @@
 {
   "expo": {
-    "name": "StudyTracker",
-    "slug": "study-tracker-app",
-    "version": "1.0.0",
-    "scheme": "studytracker",
+    "name": "StudentPlannerV2",
+    "slug": "student-planner-v2",
+    "version": "2.0.0",
+    "scheme": "studentplannerv2",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "icon": "./assets/icon.png",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.studytracker.app"
+      "bundleIdentifier": "com.studentplanner.v2"
     },
     "android": {
-      "package": "com.studytracker.app",
+      "package": "com.studentplanner.v2",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#4F46E5"

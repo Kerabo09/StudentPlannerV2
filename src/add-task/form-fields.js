@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Keyboard, Pressable, Text, TextInput, View } from 'react-native';
+import { Keyboard, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { BackIcon, CalendarIcon, ChevronRightIcon } from '@/tasks/icon';
+import { Chip, ESTIMATES, formatMinutes, getSubjects, REPEATS, TASK_TYPES, useApp } from '@/tasks/tasks';
 import { colors } from '@/tasks/tasks.styles';
 import { calendarStyles, formStyles } from './add-task.styles';
 
@@ -12,6 +13,81 @@ const WEEKDAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 const pad = n => String(n).padStart(2, '0');
 const toText = (year, month, day) => `${year}-${pad(month + 1)}-${pad(day)}`;
+
+/** A row of one-tap choices (Type, Repeat, Time needed). options = [{ label, value }]. */
+export function ChoiceField({ label, options, value, onChange }) {
+  return (
+    <View>
+      <Text style={formStyles.label}>{label}</Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={formStyles.choiceRow}
+      >
+        {options.map(o => (
+          <Chip key={String(o.value)} label={o.label} active={value === o.value} onPress={() => onChange(o.value)} />
+        ))}
+      </ScrollView>
+    </View>
+  );
+}
+
+export const TYPE_OPTIONS = TASK_TYPES.map(t => ({ label: t, value: t }));
+export const REPEAT_OPTIONS = REPEATS.map(r => ({ label: r === 'None' ? 'No repeat' : r, value: r }));
+export const ESTIMATE_OPTIONS = [
+  { label: 'Not set', value: null },
+  ...ESTIMATES.map(m => ({ label: formatMinutes(m), value: m })),
+];
+
+const QUICK_DATES = [
+  { label: 'Tomorrow', days: 1 },
+  { label: 'In 3 days', days: 3 },
+  { label: 'Next week', days: 7 },
+];
+
+const dateInDays = days => {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return toText(d.getFullYear(), d.getMonth(), d.getDate());
+};
+
+/** Subjects the student already used, as one-tap chips (so "Math" is not typed three different ways). */
+export function SubjectField({ label = 'Subject', value, onChange }) {
+  const { tasks } = useApp();
+  const subjects = getSubjects(tasks).slice(0, 8);
+
+  return (
+    <View>
+      <Text style={formStyles.label}>{label}</Text>
+      <TextInput
+        style={formStyles.input}
+        placeholder="e.g. Mobile Programming"
+        placeholderTextColor={colors.faint}
+        value={value}
+        onChangeText={onChange}
+        returnKeyType="next"
+      />
+      {subjects.length > 0 ? (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={formStyles.chipRow}
+        >
+          {subjects.map(name => (
+            <Chip
+              key={name}
+              label={name}
+              active={value.trim().toLowerCase() === name.toLowerCase()}
+              onPress={() => onChange(name)}
+            />
+          ))}
+        </ScrollView>
+      ) : null}
+    </View>
+  );
+}
 
 export function DeadlineField({ label = 'Deadline', value, onChange, error = '' }) {
   const [open, setOpen] = useState(false);
@@ -48,6 +124,12 @@ export function DeadlineField({ label = 'Deadline', value, onChange, error = '' 
         </Pressable>
       </View>
       {error ? <Text style={formStyles.errorText}>{error}</Text> : null}
+
+      <View style={formStyles.quickRow}>
+        {QUICK_DATES.map(q => (
+          <Chip key={q.label} label={q.label} active={value === dateInDays(q.days)} onPress={() => onChange(dateInDays(q.days))} />
+        ))}
+      </View>
 
       {open ? (
         <MonthCalendar
