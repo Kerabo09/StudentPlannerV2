@@ -34,7 +34,47 @@ export function CompletedScreen() {
       'Delete All',
       clearCompletedTasks,
     );
+ return (
+    <SafeAreaView edges={['top']} style={styles.screen}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Completed Tasks</Text>
+        {completed.length > 0 && (
+          <Pressable onPress={handleDeleteAll} hitSlop={8} style={styles.deleteAllBtn} accessibilityRole="button">
+            <Text style={styles.deleteAllText}>Delete all</Text>
+          </Pressable>
+        )}
+      </View>
 
+      <FlatList
+        style={styles.list}
+        data={completed}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => <TaskCard task={item} onDelete={() => handleDeleteOne(item)} />}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <>
+            {tasks.length > 0 ? <InsightsCard tasks={tasks} /> : null}
+            {completed.length > 0 ? (
+            <Text style={styles.count}>
+              {completed.length} completed task{completed.length !== 1 ? 's' : ''}
+              {'  \u00B7  '}
+              {stats.doneThisWeek} this week
+              {stats.focusMinutes > 0 ? `  \u00B7  ${formatMinutes(stats.focusMinutes)} studied` : ''}
+            </Text>
+            ) : null}
+          </>
+        }
+        ListEmptyComponent={
+          <EmptyState
+            title="Nothing completed yet"
+            body="Tasks you tick off on the Tasks tab will show up here."
+          />
+        }
+        ListFooterComponent={<View style={styles.listFooter} />}
+      />
+    </SafeAreaView>
+  );
+}
  
 
 function TaskCard({ task, onDelete }) {
