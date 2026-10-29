@@ -26,6 +26,18 @@ export function EditTaskScreen() {
       </Screen>
     );
   }
+ return (
+    <TaskForm
+      heading="Edit Task"
+      initial={task}
+      onCancel={goBack}
+      onSubmit={values => {
+        updateTask(task.id, values);
+        goBack();
+      }}
+    />
+  );
+}
 
  
 function TaskForm({ heading, initial, onSubmit, onCancel }) {
