@@ -27,19 +27,7 @@ export function EditTaskScreen() {
     );
   }
 
-  return (
-    <TaskForm
-      heading="Edit Task"
-      initial={task}
-      onCancel={goBack}
-      onSubmit={values => {
-        updateTask(task.id, values);
-        goBack();
-      }}
-    />
-  );
-}
-
+ 
 function TaskForm({ heading, initial, onSubmit, onCancel }) {
   const [title, setTitle] = useState(initial?.title ?? '');
   const [subject, setSubject] = useState(initial?.subject ?? '');
